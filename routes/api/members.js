@@ -52,6 +52,10 @@ router.post('/', (req, res) => {
 
 	// Return as a response all the members
 	res.json(members)
+
+	// Made when using handlebars and the html form
+	// Usually you don't get return JSON as a response but you redirect back to the page where you will now see the new member
+	// res.redirect('/')
 })
 
 // Update member
@@ -74,6 +78,26 @@ router.put('/:id', (req, res) => {
 
 				res.json({ msg: 'Member updated', member })
 			}
+		})
+	} else {
+		res.status(400).json({ msg: `No member with the id of: ${req.params.id}` })
+	}
+})
+
+// Delete member
+router.delete('/:id', (req, res) => {
+	const found = members.some((member) => {
+		return member.id === parseInt(req.params.id)
+	})
+
+	// Return a response with a msg and with a new array that has the one with said ID filtered out
+	// Filter only returns an array that passes the test, so the ones that did not match the ID
+	if (found) {
+		res.json({
+			msg: 'Member deleted',
+			members: members.filter((member) => {
+				return member.id !== parseInt(req.params.id)
+			}),
 		})
 	} else {
 		res.status(400).json({ msg: `No member with the id of: ${req.params.id}` })
