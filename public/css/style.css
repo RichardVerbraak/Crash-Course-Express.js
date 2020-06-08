@@ -1,0 +1,9 @@
+body {
+	display: flex;
+	box-sizing: border-box;
+	background-color: #333;
+	color: #fff;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Quicksand', sans-serif;
+}
