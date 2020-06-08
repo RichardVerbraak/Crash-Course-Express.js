@@ -8,6 +8,10 @@ const app = express()
 // Initialize middleware
 // app.use(logger)
 
+// Body Parser Middleware
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+
 // Set Static Folder
 // The server will now just serve the public files
 app.use(express.static(path.join(__dirname, 'public')))
